@@ -1,0 +1,13 @@
+checkpointClose start
+checkpointClose end
+Using folder C:\Users\s26678\AppData\Local\Temp\/triple2nl/cache/dereferenced as cache for IRI converter.
+checkpointClose start
+checkpointClose end
+Using folder C:\Users\s26678\AppData\Local\Temp\/triple2nl/cache/dereferenced as cache for IRI converter.
+checkpointClose start
+checkpointClose end
+checkpointClose start
+checkpointClose end
+Using folder C:\Users\s26678\AppData\Local\Temp\/triple2nl/cache/dereferenced as cache for IRI converter.
+Determining type of ?uri...
+Type(?uri)=[http://sparql2nl.aksw.org/entity]

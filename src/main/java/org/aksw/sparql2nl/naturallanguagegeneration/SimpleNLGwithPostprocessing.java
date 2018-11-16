@@ -18,6 +18,7 @@ import org.aksw.jena_sparql_api.core.QueryExecutionFactory;
 import org.aksw.jena_sparql_api.model.QueryExecutionFactoryModel;
 import org.aksw.sparql2nl.naturallanguagegeneration.property.PropertyVerbalization;
 import org.aksw.sparql2nl.naturallanguagegeneration.property.PropertyVerbalizer;
+import org.aksw.sparql2nl.naturallanguagegeneration.QueryRewriter;
 import org.aksw.sparql2nl.nlp.stemming.PlingStemmer;
 import org.aksw.sparql2nl.queryprocessing.DisjunctiveNormalFormConverter;
 import org.aksw.sparql2nl.queryprocessing.GenericType;
@@ -144,7 +145,7 @@ public class SimpleNLGwithPostprocessing implements Sparql2NLConverter {
 		this.wordnetDirectory = wordnetDirectory;
 		
 		qef = new QueryExecutionFactoryHttp(endpoint.getURL().toString(), endpoint.getDefaultGraphURIs());
-		CacheFrontend frontend = CacheUtilsH2.createCacheFrontend(cacheName, true, TimeUnit.DAYS.toMillis(30));
+		//CacheFrontend frontend = CacheUtilsH2.createCacheFrontend(cacheName, true, TimeUnit.DAYS.toMillis(30));
 		qef = new QueryExecutionFactoryCacheEx(qef, frontend);
 		
 		this.qef = qef;

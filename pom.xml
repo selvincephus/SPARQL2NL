@@ -1,4 +1,4 @@
-
+﻿
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -66,9 +66,11 @@
 	</licenses>
 
 	<properties>
-		<compiler.version>1.7</compiler.version>
+		<compiler.version>1.8</compiler.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<assess.warFile.name>assess</assess.warFile.name>
+		<jena.sparql.api.version>2.13.0-5</jena.sparql.api.version>
+		<simplenlg.version>4.4.7-SNAPSHOT</simplenlg.version>
 	</properties>
 
 	<repositories>
@@ -76,6 +78,10 @@
 			<id>maven.aksw.internal</id>
 			<name>University Leipzig, AKSW Maven2 Repository</name>
 			<url>http://maven.aksw.org/archiva/repository/internal</url>
+		</repository>
+		<repository>
+   			<id>maven.aksw.internal</id>
+   			<url>http://maven.aksw.org/repository/internal/</url>
 		</repository>
 
 		<repository>
@@ -101,34 +107,35 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 		</dependency>
+		
 
 		<dependency>
 			<groupId>org.dllearner</groupId>
 			<artifactId>components-ext</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nif</artifactId>
-					<groupId>org.nlp2rdf</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.aksw.commons</artifactId>
-					<groupId>sparql</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>com.hp.hpl.jena</artifactId>
-					<groupId>arq</groupId>
-				</exclusion>
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>nif</artifactId> -->
+<!-- 					<groupId>org.nlp2rdf</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>org.aksw.commons</artifactId> -->
+<!-- 					<groupId>sparql</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>com.hp.hpl.jena</artifactId> -->
+<!-- 					<groupId>arq</groupId> -->
+<!-- 				</exclusion> -->
 
-				<exclusion>
-					<artifactId>jena-arq</artifactId>
-					<groupId>org.apache.jena</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jena</artifactId>
-					<groupId>com.hp.hpl.jena</groupId>
-				</exclusion>
-			</exclusions>
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>jena-arq</artifactId> -->
+<!-- 					<groupId>org.apache.jena</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>jena</artifactId> -->
+<!-- 					<groupId>com.hp.hpl.jena</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 			</exclusions> -->
 		</dependency>
 
 		<dependency>
@@ -179,30 +186,30 @@
 			<groupId>org.dllearner</groupId>
 			<artifactId>components-core</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<artifactId>owlapi</artifactId>
-					<groupId>net.sourceforge.owlapi</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>owlapi</artifactId>
-					<groupId>net.sourceforge.owlapi</groupId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.hp.hpl.jena</groupId>
-					<artifactId>jena</artifactId>
-				</exclusion>
-				<!-- <exclusion> <artifactId>stanford-corenlp</artifactId> <groupId>edu.stanford.nlp</groupId> 
-					</exclusion> -->
-			</exclusions>
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<groupId>org.slf4j</groupId> -->
+<!-- 					<artifactId>slf4j-api</artifactId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<groupId>org.slf4j</groupId> -->
+<!-- 					<artifactId>slf4j-log4j12</artifactId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>owlapi</artifactId> -->
+<!-- 					<groupId>net.sourceforge.owlapi</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>owlapi</artifactId> -->
+<!-- 					<groupId>net.sourceforge.owlapi</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> -->
+<!-- 					<groupId>com.hp.hpl.jena</groupId> -->
+<!-- 					<artifactId>jena</artifactId> -->
+<!-- 				</exclusion> -->
+<!-- 				<exclusion> <artifactId>stanford-corenlp</artifactId> <groupId>edu.stanford.nlp</groupId> -->
+<!-- 					</exclusion> -->
+<!-- 			</exclusions> -->
 		</dependency>
 
 		<dependency>
@@ -297,6 +304,17 @@
 	<groupId>org.jgrapht</groupId>
 	<artifactId>jgrapht-ext</artifactId>
 	<version>0.9.0</version>
+</dependency>
+
+<dependency>
+  <groupId>net.sf.extjwnl</groupId>
+  <artifactId>extjwnl</artifactId>
+  <version>1.9.4</version>
+</dependency>
+<dependency>
+  <groupId>net.sf.extjwnl</groupId>
+  <artifactId>extjwnl-data-wn31</artifactId>
+  <version>1.2</version>
 </dependency>
 
 

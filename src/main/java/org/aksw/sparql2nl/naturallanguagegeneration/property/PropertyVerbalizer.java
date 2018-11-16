@@ -16,6 +16,9 @@ import org.aksw.sparql2nl.naturallanguagegeneration.URIConverter;
 import org.apache.log4j.Logger;
 import org.dllearner.kb.sparql.SparqlEndpoint;
 
+import net.didion.jwnl.JWNLException;
+import net.sf.extjwnl.dictionary.Dictionary;
+
 import com.google.common.collect.Lists;
 import com.hp.hpl.jena.rdf.model.Model;
 
@@ -66,6 +69,24 @@ public class PropertyVerbalizer {
     public PropertyVerbalizer(QueryExecutionFactory qef, String wordnetDictionary) {
         this(new URIConverter(qef), wordnetDictionary);
     }
+    
+    public PropertyVerbalizer(URIConverter uriConverter, String cacheDirectory, Dictionary wordnetDictionary) throws JWNLException {
+        this.uriConverter = uriConverter;
+        // this.database = wordnetDictionary == null ? Dictionary.getDefaultResourceInstance() : wordnetDictionary;
+		this.database = WordNetDatabase.getFileInstance();
+        
+        // preposition = new Preposition();
+        
+        Properties props = new Properties();
+		props.put("annotators", "tokenize, ssplit, pos, lemma, parse");
+		props.put("ssplit.isOneSentence","true");
+		pipeline = new StanfordCoreNLP(props);
+    }
+    
+	public PropertyVerbalizer(QueryExecutionFactory qef, String cacheDirectory, Dictionary wordnetDictionary) {
+		// this(new URIConverter(qef), cacheDirectory, wordnetDictionary);
+	}
+	
     
     public PropertyVerbalizer(URIConverter uriConverter, String wordnetDictionary) {
         this.uriConverter = uriConverter;
